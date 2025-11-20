@@ -1,7 +1,6 @@
 import React from 'react';
 import { Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
 import type { Product } from '../types';
-import fondo from '../assets/fondo.jpg';
 import logoMarte from '../assets/logo-marte.png';
 const colors = {
   dark: '#343A40',
