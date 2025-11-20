@@ -24,7 +24,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({ onDataLoaded }) => {
                 console.log({ data })
 
                 // Validate data
-                const validData = data.filter(item => item.nombre && item.precio && item.linkImage);
+                const validData = data.filter(item => item.titulo && item.precio && item.linkImage);
 
                 if (validData.length === 0) {
                     setError('No se encontraron productos válidos. Verifica las columnas.');

@@ -12,9 +12,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 10,
+        fontSize: 15,
+        fontWeight: 'semibold',
     },
     grid: {
         flexDirection: 'row',
@@ -37,7 +36,7 @@ const styles = StyleSheet.create({
         height: 160,
         width: '100%',
         marginBottom: 8,
-        backgroundColor: '#f3f4f6',
+        /* backgroundColor: '#f3f4f6', */
         borderBottom: '1px solid #e5e7eb',
     },
     image: {
@@ -47,10 +46,17 @@ const styles = StyleSheet.create({
     },
     content: {
         padding: 8,
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
         flex: 1,
     },
-    productName: {
+    titleProduct: {
+        fontSize: 10,
+        marginBottom: 4,
+        color: '#111827',
+        maxLines: 2,
+        textOverflow: 'ellipsis',
+    },
+    subtitleProduct: {
         fontSize: 10,
         marginBottom: 4,
         color: '#111827',
@@ -74,7 +80,7 @@ export const CatalogPDF: React.FC<CatalogPDFProps> = ({ products }) => {
         <Document>
             <Page size="A4" style={styles.page}>
                 <View style={styles.header}>
-                    <Text style={styles.title}>Catálogo de Productos</Text>
+                    <Text style={styles.title}>Distribuidora Marte</Text>
                 </View>
                 <View style={styles.grid}>
                     {products.map((product, index) => (
@@ -84,8 +90,8 @@ export const CatalogPDF: React.FC<CatalogPDFProps> = ({ products }) => {
                                     {/* Ensure valid URL and handle potential CORS issues by user providing accessible URLs */}
                                     {product.linkImage ? (
                                         <Image
-                                            src={product.linkImage}
                                             style={styles.image}
+                                            src={product.linkImage}
                                         />
                                     ) : (
                                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -94,8 +100,9 @@ export const CatalogPDF: React.FC<CatalogPDFProps> = ({ products }) => {
                                     )}
                                 </View>
                                 <View style={styles.content}>
-                                    <Text style={styles.productName}>{product.nombre}</Text>
-                                    <Text style={styles.price}>{product.precio}</Text>
+                                    <Text style={styles.titleProduct}>{product.titulo}</Text>
+                                    {product.subtitulo && product.subtitulo.length > 0 && <Text style={styles.subtitleProduct}>{product.subtitulo}</Text>}
+                                    <Text style={styles.price}>${product.precio}</Text>
                                 </View>
                             </View>
                         </View>

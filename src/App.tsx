@@ -3,7 +3,7 @@ import { FileUpload } from './components/FileUpload';
 import { ProductGrid } from './components/ProductGrid';
 import { CatalogPDF } from './components/CatalogPDF';
 import type { Product } from './types';
-import { PDFDownloadLink } from '@react-pdf/renderer';
+import { BlobProvider } from '@react-pdf/renderer';
 import { FileDown, RefreshCw, PackageOpen } from 'lucide-react';
 
 function App() {
@@ -41,18 +41,19 @@ function App() {
                 <RefreshCw className="w-4 h-4" />
                 <span>Nuevo</span>
               </button>
-              <PDFDownloadLink
-                document={<CatalogPDF products={products} />}
-                fileName="catalogo_productos.pdf"
-                className="flex items-center gap-2 px-6 py-2.5 text-sm font-bold text-blue-700 bg-white rounded-md hover:bg-blue-50 shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-600 focus:ring-white"
-              >
-                {({ loading }) => (
-                  <>
+              <BlobProvider document={<CatalogPDF products={products} />}>
+                {({ url, loading }) => (
+                  <a
+                    href={url || '#'}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`flex items-center gap-2 px-6 py-2.5 text-sm font-bold text-blue-700 bg-white rounded-md hover:bg-blue-50 shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-600 focus:ring-white ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  >
                     <FileDown className="w-4 h-4" />
                     {loading ? 'Generando...' : 'Descargar PDF'}
-                  </>
+                  </a>
                 )}
-              </PDFDownloadLink>
+              </BlobProvider>
             </div>
           )}
         </div>
@@ -64,7 +65,7 @@ function App() {
             <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 text-center">
               <h2 className="text-2xl font-bold text-gray-800 mb-4">Comienza subiendo tu inventario</h2>
               <p className="text-gray-500 mb-8">
-                Sube un archivo Excel (.xlsx) con las columnas <span className="font-mono text-xs bg-gray-100 px-2 py-1 rounded text-gray-700">nombre</span>, <span className="font-mono text-xs bg-gray-100 px-2 py-1 rounded text-gray-700">precio</span> y <span className="font-mono text-xs bg-gray-100 px-2 py-1 rounded text-gray-700">linkImage</span>.
+                Sube un archivo Excel (.xlsx) con las columnas <span className="font-mono text-xs bg-gray-100 px-2 py-1 rounded text-gray-700">title</span>, <span className="font-mono text-xs bg-gray-100 px-2 py-1 rounded text-gray-700">subtitle</span>, <span className="font-mono text-xs bg-gray-100 px-2 py-1 rounded text-gray-700">precio</span> y <span className="font-mono text-xs bg-gray-100 px-2 py-1 rounded text-gray-700">linkImage</span>.
               </p>
               <FileUpload onDataLoaded={handleDataLoaded} />
             </div>
