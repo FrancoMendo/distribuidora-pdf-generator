@@ -17,6 +17,8 @@ function App() {
     setProducts([]);
   };
 
+  const columnasExcel = ["title", "subtitle", "categoria", "precio", "linkImage"];
+
   return (
     <div className="min-h-screen bg-gray-50 font-sans text-gray-900">
       {/* Hero Header */}
@@ -65,7 +67,7 @@ function App() {
             <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 text-center">
               <h2 className="text-2xl font-bold text-gray-800 mb-4">Comienza subiendo tu inventario</h2>
               <p className="text-gray-500 mb-8">
-                Sube un archivo Excel (.xlsx) con las columnas <span className="font-mono text-xs bg-gray-100 px-2 py-1 rounded text-gray-700">title</span>, <span className="font-mono text-xs bg-gray-100 px-2 py-1 rounded text-gray-700">subtitle</span>, <span className="font-mono text-xs bg-gray-100 px-2 py-1 rounded text-gray-700">precio</span> y <span className="font-mono text-xs bg-gray-100 px-2 py-1 rounded text-gray-700">linkImage</span>.
+                Sube un archivo Excel (.xlsx) con las columnas {columnasExcel.map((columna) => <span className="font-mono text-xs bg-gray-100 px-2 py-1 rounded text-gray-700">{columna}</span>)}.
               </p>
               <FileUpload onDataLoaded={handleDataLoaded} />
             </div>

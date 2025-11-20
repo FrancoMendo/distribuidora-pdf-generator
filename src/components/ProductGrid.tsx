@@ -44,7 +44,6 @@ export const ProductGrid: React.FC<ProductGridProps> = ({ products }) => {
 
     if (loading) return <div>Cargando imágenes...</div>;
 
-
     return (
         <div className="w-full max-w-6xl mx-auto p-4 h-screen">
             <h2 className="text-2xl font-bold mb-6 text-gray-800">Vista Previa del Catálogo</h2>
