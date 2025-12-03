@@ -5,6 +5,7 @@ import { CatalogPDF } from './components/CatalogPDF';
 import type { Product } from './types';
 import { BlobProvider } from '@react-pdf/renderer';
 import { FileDown, RefreshCw, PackageOpen } from 'lucide-react';
+import packageJson from '../package.json';
 
 function App() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -29,7 +30,12 @@ function App() {
               <PackageOpen className="w-10 h-10 text-white" />
             </div>
             <div>
-              <h1 className="text-3xl font-extrabold tracking-tight">Generador de Catálogo</h1>
+              <h1 className="text-3xl font-extrabold tracking-tight">
+                Generador de Catálogo
+                <span className="ml-3 text-sm font-medium bg-blue-500/30 px-2 py-1 rounded-full border border-blue-400/30">
+                  v{packageJson.version}
+                </span>
+              </h1>
               <p className="text-blue-100 text-sm mt-1">Convierte tu Excel en un PDF profesional al instante</p>
             </div>
           </div>
